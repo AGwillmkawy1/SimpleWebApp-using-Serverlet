@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login Page</title>
+    <style>
+      body {
+      background: linear-gradient( to top right, green,yellow, blue);
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .form-container {
+      width: 50%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    
+    h1 {
+      color: red;
+      margin-bottom: 30px;
+    }
+    
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+    
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    p{
+        font-size: 15px;
+        font-family: calibri body;
+        color: #333;
+        
+    }
+    button {
+  background-color: #333;
+  border: none; 
+  color: white; 
+  padding: 12px 24px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border-radius: 8px; 
+}
+      #languageDropdown {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #languageDropdown:hover {
+    background-color: #333;
+    color: white;
+  }
+    </style>
+  </head>
+  <body>
+     <div class="form-container"> 
+    <h1 id="heading"></h1>
+    <form action="LoginServlet" method="post">
+      
+        
+        <input type="email" name="email" id="emailInput" placeholder="" />
+        <input type="password" name="password" id="passwordInput" placeholder="" />
+        <input type="submit" id="loginButton" value="" />
+    </form>
+    <p id="newAccountText"></p>
+   <button onclick="window.location.href='Signup.html'">Sign up</button>
+
+    <select id="languageDropdown">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+    </select>
+
+    <script>
+      // Set default language
+      let currentLanguage = "en";
+
+      // Object containing text for each language
+      const languages = {
+        en: {
+          heading: "Login",
+        
+          emailPlaceholder: "Email",
+          passwordPlaceholder: "Password",
+          loginButtonValue: "Log in",
+          newAccountText: "Don't have an account?",
+          signupLinkText: "Thanks for choising us"
+        },
+        fr: {
+          heading: "Connexion",
+          
+          emailPlaceholder: "Email",
+          passwordPlaceholder: "Mot de passe",
+          loginButtonValue: "Se connecter",
+          newAccountText: "Vous n'avez pas de compte?",
+          signupLinkText: "Inscrivez-vous ici"
+        },
+        es: {
+          heading: "Acceso",
+         
+          emailPlaceholder: "Correo electrónico",
+          passwordPlaceholder: "Contraseña",
+          loginButtonValue: "Iniciar sesión",
+          newAccountText: "¿No tienes una cuenta?",
+          signupLinkText: "Regístrate aquí"
+        }
+      };
+
+      // Set text for current language
+      function setTextForCurrentLanguage() {
+        const language = languages[currentLanguage];
+        heading.textContent = language.heading;
+        emailInput.placeholder = language.emailPlaceholder;
+        passwordInput.placeholder = language.passwordPlaceholder;
+        loginButton.value = language.loginButtonValue;
+        newAccountText.textContent = language.newAccountText;
+        signupLink.textContent = language.signupLinkText;
+      }
+
+      // Update language on dropdown selection
+      const languageDropdown = document.getElementById("languageDropdown");
+      languageDropdown.addEventListener("change", function() {
+        currentLanguage = this.value;
+        setTextForCurrentLanguage();
+      });
+
+      // Initialize page with default language
+      setTextForCurrentLanguage();
+    </script>
+  </body>
+</html>

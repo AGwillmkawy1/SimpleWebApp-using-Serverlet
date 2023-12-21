@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up Page</title>
+  <style>
+      body {
+      background: linear-gradient( to top right, green,yellow, blue);
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .form-container {
+      width: 50%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    
+    h1 {
+      color: red;
+      margin-bottom: 30px;
+    }
+    
+    input[type="email"],
+    input[type="integer"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+    
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    p{
+        font-size: 15px;
+        font-family: calibri body;
+        color: #333;
+        
+    }
+    button {
+  background-color: #333;
+  border: none; 
+  color: white; 
+  padding: 12px 24px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border-radius: 8px; 
+}
+
+#language-dropdown {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #language-dropdown:hover {
+    background-color: #333;
+    color: white;
+  }
+</style>
+</head>
+<body>
+  <div class="form-container">
+    <h1 id="heading"></h1>
+    <form id="signup-form" action="SignupServlet" method="post">
+      <input type="integer" name='studentid' placeholder="" id="student-id-input">
+      <input type="email" name="email" placeholder="" id="email-input">
+      <input type="password" name="password" placeholder="" id="password-input">
+      <input type="submit" value="" id="signup-button">
+    </form>
+    <p id="existing-account"></p>
+    <a href='Login_page.html'>
+      <button>Login</button>
+    </a>
+  </div>
+
+  <select id="language-dropdown">
+    <option value="en">English</option>
+    <option value="fr">French</option>
+    <option value="es">Spanish</option>
+  </select>
+
+  <script>
+    const form = document.querySelector("#signup-form");
+    const studentIdInput = document.querySelector("#student-id-input");
+    const emailInput = document.querySelector("#email-input");
+    const passwordInput = document.querySelector("#password-input");
+    const signupButton = document.querySelector("#signup-button");
+    const heading = document.querySelector("#heading");
+    const existingAccount = document.querySelector("#existing-account");
+    const languageDropdown = document.querySelector("#language-dropdown");
+
+    // Set default language
+    let currentLanguage = "en";
+
+    // Object containing text for each language
+    const languages = {
+      en: {
+        heading: "Sign up",
+        studentIdPlaceholder: "Student ID",
+        emailPlaceholder: "Email",
+        passwordPlaceholder: "Password",
+        signupButtonValue: "Sign up",
+        existingAccountText: "Thanks for choising us"
+      },
+      fr: {
+        heading: "S'inscrire",
+        studentIdPlaceholder: "Identifiant étudiant",
+        emailPlaceholder: "Email",
+        passwordPlaceholder: "Mot de passe",
+        signupButtonValue: "S'inscrire",
+        existingAccountText: "Vous avez déjà un compte?"
+      },
+      es: {
+        heading: "Regístrate",
+        studentIdPlaceholder: "ID de estudiante",
+        emailPlaceholder: "Correo electrónico",
+        passwordPlaceholder: "Contraseña",
+        signupButtonValue: "Registrarse",
+        existingAccountText: "¿Ya tienes una cuenta?"
+      }
+    };
+
+    // Set text for current language
+    function setTextForCurrentLanguage() {
+      const language = languages[currentLanguage];
+      heading.textContent = language.heading;
+      studentIdInput.placeholder = language.studentIdPlaceholder;
+      emailInput.placeholder = language.emailPlaceholder;
+      passwordInput.placeholder = language.passwordPlaceholder;
+      signupButton.value = language.signupButtonValue;
+      existingAccount.textContent = language.existingAccountText;
+    }
+
+    setTextForCurrentLanguage();
+
+    // Listen for changes in the language dropdown
+    languageDropdown.addEventListener("change", function(event) {
+      currentLanguage = event.target.value;
+      setTextForCurrentLanguage();
+    });
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      if (!emailInput.value || !passwordInput.value) {
+        alert("Both email and password fields are required");
+      } else {
+        form.submit();
+      }
+    });
+  </script>
+</body>
+
+</html>
